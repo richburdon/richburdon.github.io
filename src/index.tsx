@@ -14,6 +14,7 @@ const useStyles = makeStyles({
       margin: 0,
       overflow: 'hidden',
       fontFamily: 'Montserrat, sans-serif',
+      backgroundColor: colors.grey[200],
       color: colors.grey[800]
     }
   },
