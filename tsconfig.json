@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
