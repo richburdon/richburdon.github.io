@@ -22,7 +22,6 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     disableHostCheck: true,
-    hotOnly: true,
     port: 8080,
     watchOptions: {
       ignored: /node_modules/,

@@ -8,13 +8,15 @@ import ReactDOM from 'react-dom';
 import { makeStyles } from '@material-ui/styles';
 import { colors } from '@material-ui/core';
 
+import Waves from './Waves';
+
 const useStyles = makeStyles({
   '@global': {
     body: {
       margin: 0,
       overflow: 'hidden',
       fontFamily: 'Montserrat, sans-serif',
-      backgroundColor: colors.grey[200],
+      backgroundColor: '#000',
       color: colors.grey[800]
     }
   },
@@ -30,14 +32,25 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
-    justifyContent: 'center'
+    _justifyContent: 'center'
   },
   center: {
     display: 'flex',
     justifyContent: 'center'
   },
   logoType: {
-    fontSize: 80
+    fontSize: 80,
+    '& span': {
+      color: colors.grey[400]
+    }
+  },
+  waves: {
+    display: 'flex',
+    position: 'absolute',
+    bottom: 0,
+    top: 160,
+    left: 0,
+    right: 0,
   }
 });
 
@@ -47,7 +60,12 @@ const Root = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <div className={clsx(classes.center, classes.logoType)}>RB</div>
+        <div className={clsx(classes.center, classes.logoType)}>
+          <span>rich</span>burdon.com
+        </div>
+      </div>
+      <div className={clsx(classes.waves)}>
+        <Waves />
       </div>
     </div>
   );
