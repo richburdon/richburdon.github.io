@@ -8,7 +8,7 @@ import * as THREE from 'three';
 
 import { makeStyles } from '@material-ui/styles';
 
-import { THREEx } from './lib/threex';
+import { THREEx } from './lib/THREEx';
 
 const config = {
   mesh: {
