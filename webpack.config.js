@@ -3,7 +3,9 @@
 //
 
 const path = require('path');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -16,6 +18,10 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
     ],
   },
   devServer: {
@@ -29,12 +35,28 @@ module.exports = {
     }
   },
   plugins: [
+    // NOTE: Must come first.
+    // https://webpack.js.org/plugins/html-webpack-plugin
     new HtmlWebPackPlugin({
       template: './public/index.html',
       templateParameters: {
         title: 'Rich Burdon'
       }
-    })
+    }),
+
+    // BUG: webpack 5.
+    // https://www.npmjs.com/package/google-fonts-webpack-plugin
+    new GoogleFontsPlugin({
+      fonts: [
+        { family: 'Montserrat' }
+      ]
+    }),
+
+    // BUG: https://github.com/jantimon/favicons-webpack-plugin/issues/222
+    // https://github.com/jantimon/favicons-webpack-plugin
+    new FaviconsWebpackPlugin({
+      logo: './static/images/logo-192.png'
+    }),
   ],
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ],

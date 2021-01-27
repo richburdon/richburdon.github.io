@@ -10,16 +10,19 @@ import { colors } from '@material-ui/core';
 
 import Waves from './Waves';
 
-const useStyles = makeStyles({
+// TODO(burdon): External fonts https://material-ui.com/customization/typography/
+const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
       margin: 0,
       overflow: 'hidden',
       fontFamily: 'Montserrat, sans-serif',
+      fontWeight: 100,
       backgroundColor: '#000',
       color: colors.grey[800]
     }
   },
+
   root: {
     display: 'flex',
     position: 'absolute',
@@ -31,8 +34,7 @@ const useStyles = makeStyles({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    flex: 1,
-    _justifyContent: 'center'
+    flex: 1
   },
   center: {
     display: 'flex',
@@ -44,6 +46,21 @@ const useStyles = makeStyles({
       color: colors.grey[400]
     }
   },
+  fadeIn: {
+    opacity: 1,
+    animation: `$fadeIn 3000ms ease`,
+  },
+  '@keyframes fadeIn': {
+    '0%': {
+      opacity: 0
+    },
+    '50%': {
+      opacity: 0
+    },
+    '100%': {
+      opacity: 1
+    }
+  },
   waves: {
     display: 'flex',
     position: 'absolute',
@@ -52,7 +69,7 @@ const useStyles = makeStyles({
     left: 0,
     right: 0,
   }
-});
+}));
 
 const Root = () => {
   const classes = useStyles();
@@ -60,11 +77,11 @@ const Root = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <div className={clsx(classes.center, classes.logoType)}>
+        <div className={clsx(classes.center, classes.logoType, classes.fadeIn)}>
           <span>rich</span>burdon.com
         </div>
       </div>
-      <div className={clsx(classes.waves)}>
+      <div className={classes.waves}>
         <Waves />
       </div>
     </div>
