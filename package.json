@@ -19,14 +19,15 @@
   },
   "homepage": "https://github.com/richburdon/richburdon.github.io#readme",
   "devDependencies": {
+    "@beyonk/google-fonts-webpack-plugin": "^1.5.0",
     "@types/html-webpack-plugin": "^3.2.4",
     "@types/lodash": "^4.14.168",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/superagent": "^4.1.10",
     "@types/three": "^0.103.2",
     "css-loader": "^5.0.1",
     "favicons-webpack-plugin": "~5.0.0-alpha.7",
-    "@beyonk/google-fonts-webpack-plugin": "^1.5.0",
     "html-webpack-plugin": "~5.0.0-beta.6",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.0.14",
@@ -39,10 +40,14 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/styles": "^4.11.3",
+    "@types/faker": "^5.1.5",
     "clsx": "^1.1.1",
+    "faker": "^5.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-resize-aware": "^3.1.0",
+    "simple-react-console": "^1.0.1",
+    "superagent": "^6.1.0",
     "three": "^0.124.0"
   }
 }

@@ -8,7 +8,8 @@ import ReactDOM from 'react-dom';
 import { makeStyles } from '@material-ui/styles';
 import { colors } from '@material-ui/core';
 
-import Waves from './Waves';
+import Console from './components/Console';
+import Waves from './components/Waves';
 
 // TODO(burdon): External fonts https://material-ui.com/customization/typography/
 const useStyles = makeStyles(theme => ({
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center'
   },
   logoType: {
-    fontSize: 80,
+    fontSize: 20,
     '& span': {
       color: colors.grey[400]
     }
@@ -77,9 +78,12 @@ const Root = () => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
+        <Console />
+        {/*
         <div className={clsx(classes.center, classes.logoType, classes.fadeIn)}>
           <span>rich</span>burdon.com
         </div>
+        */}
       </div>
       <div className={classes.waves}>
         <Waves />
