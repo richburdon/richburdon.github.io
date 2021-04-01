@@ -19,7 +19,7 @@ const config = {
       y: 3,
       z: 0.2
     },
-    multiplyScalar: 10
+    multiplyScalar: 20
   },
   camera: {
     fov: 25,
@@ -30,20 +30,24 @@ const config = {
   },
   // https://threejs.org/docs/#api/en/scenes/Fog
   fog: {
-    color: 'darkgreen',
     near: 0,
-    far: 35
+    far: 50
   },
   rotation: {
     z: 0.02
+  },
+  colors: {
+    // background: 0xCCCCCC,
+    // line: 0x333333
+    background: '#000000',
+    line: 'darkgreen'
   }
 };
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
-    flex: 1,
-    opacity: .5
+    flex: 1
   }
 });
 
@@ -58,6 +62,8 @@ export const Waves = () => {
 
   // Resize.
   useEffect(() => {
+    renderer.setClearColor(config.colors.background, 1);
+
     const { width, height } = size;
     if (width && height) {
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -82,7 +88,7 @@ export const Waves = () => {
     const geometry = THREEx.Terrain.heightMapToPlaneGeometry(heightMap);
     THREEx.Terrain.heightMapToVertexColor(heightMap, geometry);
 
-    const material = new THREE.MeshBasicMaterial({ wireframe: true });
+    const material = new THREE.MeshBasicMaterial({ wireframe: true, color: config.colors.line });
     const mesh = new THREE.Mesh(geometry, material);
     mesh.lookAt(new THREE.Vector3(...config.mesh.orientation));
     Object.assign(mesh.scale, config.mesh.scale);
@@ -90,7 +96,7 @@ export const Waves = () => {
 
     // Scene.
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(config.fog.color, config.fog.near, config.fog.far);
+    scene.fog = new THREE.Fog(config.colors.background, config.fog.near, config.fog.far);
     scene.add(mesh);
 
     // Camera motion.
