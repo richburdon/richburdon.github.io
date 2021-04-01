@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
       overflow: 'hidden',
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 100,
-      backgroundColor: '#000',
+      backgroundColor: '#000000',
       color: colors.grey[800]
     }
   },

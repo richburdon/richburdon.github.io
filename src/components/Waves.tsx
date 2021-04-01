@@ -5,6 +5,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useResizeAware from 'react-resize-aware';
 import * as THREE from 'three';
+import { Camera } from 'three';
 
 import { makeStyles } from '@material-ui/styles';
 
@@ -57,29 +58,36 @@ const useStyles = makeStyles({
 export const Waves = () => {
   const classes = useStyles();
   const [resizeListener, size] = useResizeAware();
+  const [camera, setCamera] = useState<Camera>();
   const [renderer] = useState(() => new THREE.WebGLRenderer({ antialias: true }));
   const div = useRef<HTMLDivElement>();
 
   // Resize.
   useEffect(() => {
+    const { width, height } = size;
+    if (!width || !height) {
+      return;
+    }
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(config.colors.background, 1);
 
-    const { width, height } = size;
-    if (width && height) {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+    // Camera.
+    // https://threejs.org/docs/#api/en/cameras/PerspectiveCamera
+    // Object.assign(camera.position, config.camera.position);
+    const camera = new THREE.PerspectiveCamera(config.camera.fov, window.innerWidth / window.innerHeight);
+    Object.assign(camera.position, config.camera.position);
+    setCamera(camera);
   }, [size]);
 
   // Init.
   useEffect(() => {
+    if (!camera) {
+      return;
+    }
+
     // Append.
     div.current.appendChild(renderer.domElement);
-
-    // Camera.
-    // TODO(burdon): Change aspect on resize?
-    // https://threejs.org/docs/#api/en/cameras/PerspectiveCamera
-    const camera = new THREE.PerspectiveCamera(config.camera.fov, window.innerWidth / window.innerHeight, 0.01, 1000);
-    Object.assign(camera.position, config.camera.position);
 
     // Mesh.
     const heightMap = THREEx.Terrain.allocateHeightMap(256, 256);
@@ -119,7 +127,7 @@ export const Waves = () => {
     return () => {
       cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [camera]);
 
   return (
     <div ref={div} className={classes.root}>
